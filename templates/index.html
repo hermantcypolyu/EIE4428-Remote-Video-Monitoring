@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Smart Remote Video Monitoring</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header><div><p class="eyebrow">EIE4428 MULTIMEDIA COMMUNICATIONS</p><h1>Smart Remote Video Monitoring</h1></div><div id="clock" class="clock"></div></header>
+<main>
+  <section class="status-grid">
+    <article><span>Camera</span><strong id="camera">CONNECTING</strong></article><article><span>Motion</span><strong id="motion">WAITING</strong></article>
+    <article><span>Recording</span><strong id="recording">OFF</strong></article><article><span>Clients</span><strong id="clients">0</strong></article>
+    <article><span>Resolution</span><strong id="resolution">-</strong></article><article><span>Actual FPS</span><strong id="fps">-</strong></article>
+    <article><span>Avg frame</span><strong id="frameSize">-</strong></article><article><span>Est. bitrate</span><strong id="bitrate">-</strong></article>
+  </section>
+  <section class="layout">
+    <div class="video-card">
+      <div class="video-head"><span><i class="dot"></i> LIVE FEED</span><small>{{ server_url }}</small></div>
+      <div id="stage" class="stage"><img id="feed" src="/video_feed" alt="Live camera feed"><div id="roiBox" class="roi-box" hidden></div></div>
+      <p id="hint">Tip: drag on the video to select a motion-detection zone. Double-click to clear it.</p>
+    </div>
+    <aside>
+      <section class="panel"><h2>Video Quality</h2><div class="segmented"><button data-profile="low">Low</button><button data-profile="balanced" class="active">Balanced</button><button data-profile="high">High</button></div></section>
+      <section class="panel"><h2>Motion Monitoring</h2><label class="toggle"><input id="motionToggle" type="checkbox" checked><span></span> Enabled</label><label for="sensitivity">Sensitivity</label><select id="sensitivity"><option>low</option><option selected>medium</option><option>high</option></select><button id="clearRoi" class="secondary">Clear detection zone</button></section>
+      <section class="panel"><h2>Media Controls</h2><button id="snapshot">Take Screenshot</button><div class="two"><button id="recordStart">Start Recording</button><button id="recordStop" class="danger">Stop</button></div></section>
+      <section class="panel"><h2>System</h2><p>Server URL</p><code>{{ server_url }}</code><p>Uptime: <strong id="uptime">0s</strong></p><p>Events: <strong id="eventCount">0</strong></p></section>
+    </aside>
+  </section>
+  <section class="panel events"><h2>Recent Motion Events</h2><div id="events"><p class="muted">No event recorded yet.</p></div></section>
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body></html>

@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.DS_Store
+screenshots/*
+recordings/*
+event_media/*
+!screenshots/.gitkeep
+!recordings/.gitkeep
+!event_media/.gitkeep
+.claude/
